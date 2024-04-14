@@ -2,7 +2,7 @@ package OOP.HW2;
 
 import java.awt.*;
 
-public class Bai3 {
+public class Flip {
     public static void main(String[] args){
         Picture picture = new Picture(args[0]);
         int x = picture.width();

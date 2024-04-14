@@ -2,7 +2,7 @@ package OOP.HW2;
 
 import java.awt.*;
 
-public class Bai2 {
+public class RGB {
     public static void main(String[] args){
         Picture picture = new Picture(args[0]);
         int x = picture.width();

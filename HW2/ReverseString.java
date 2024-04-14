@@ -1,6 +1,6 @@
 package OOP.HW2;
 
-public class Bai1 {
+public class ReverseString {
     public static String reverse(String s){
         int x = s.length();
         char[] a = s.toCharArray();

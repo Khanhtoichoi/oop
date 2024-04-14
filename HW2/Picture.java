@@ -46,10 +46,10 @@ import javax.swing.KeyStroke;
  *  <b>Use in the curriculum.</b>
  *  The {@code Picture} class is intended for use in the
  *  curriculum once objects are introduced.
- *  The {@link } class is intended for earlier use in
+ *  The {@link StdPicture} class is intended for earlier use in
  *  the curriculum, before objects (but it can support only one
  *  picture at a time).
- *  See {@link } for a version that supports
+ *  See {@link GrayscalePicture} for a version that supports
  *  grayscale images.
  *
  *  <p>
