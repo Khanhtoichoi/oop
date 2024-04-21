@@ -1,6 +1,7 @@
 package OOP.HW2.StringCode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class blowup {
     public static String Blowup(String s){
@@ -17,5 +18,10 @@ public class blowup {
         }
         if(!Character.isDigit(a[a.length-1])) ss = ss+a[a.length-1];
         return ss;
+    }
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        System.out.print(Blowup(s));
     }
 }
