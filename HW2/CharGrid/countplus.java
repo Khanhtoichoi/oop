@@ -45,7 +45,7 @@ public class countplus {
             }
         }
 
-        return left >= 2 && right >= 2 && up >= 2 && down >= 2 && left == right && up == down;
+        return left >= 2 && right >= 2 && up >= 2 && down >= 2 && left == right && up == down && left == up;
     }
 
     public static int countPlus(char[][] table) {
@@ -60,4 +60,5 @@ public class countplus {
         }
         return count;
     }
+    
 }
