@@ -5,9 +5,8 @@ public class countplus {
         if (x < 0 || y < 0 || x >= table.length+1 || y >= table[0].length+1) {
             return false;
         }
-
         char center = table[x][y];
-
+        
         int right = 0;
         for (int i = y + 1; i < table[0].length; i++) {
             if (table[x][i] == center) {
@@ -60,5 +59,5 @@ public class countplus {
         }
         return count;
     }
-    
+
 }
