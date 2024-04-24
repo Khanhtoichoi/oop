@@ -3,7 +3,7 @@ public class GamePlay implements Runnable{
     private Panel panel;
     private TrainGUI gui;
     private Thread thread;
-    private final int FPS = 120;
+    private final int FPS = 240;
     public GamePlay(){
         thread = new Thread(this);
         panel = new Panel();
