@@ -3,10 +3,15 @@ package OOP.GameProject;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Panel extends JPanel {
-   private int horizon = 0;
-   private int vertical = 0;
+   private int horizon = 50;
+   private int vertical = 50;
+   private int xDir = 1;
+   private int yDir = 1;
+   List<Rect> rects = new ArrayList<>();
     public Panel(){
         addKeyListener(new KeyListener() {
             @Override
@@ -23,7 +28,6 @@ public class Panel extends JPanel {
                 else if(x == KeyEvent.VK_A) horizon-=10;
                 else if(x == KeyEvent.VK_S) vertical+=10;
                 else if(x == KeyEvent.VK_D) horizon+=10;
-                repaint();
             }
             @Override
             public void keyReleased(KeyEvent e) {
@@ -33,7 +37,10 @@ public class Panel extends JPanel {
        addMouseListener(new MouseListener() {
            @Override
            public void mouseClicked(MouseEvent e) {
-
+               horizon = e.getX();
+               vertical = e.getY();
+               Rect rect = new Rect(horizon,vertical);
+               rects.add(rect);
            }
 
            @Override
@@ -68,8 +75,21 @@ public class Panel extends JPanel {
            }
        });
     }
+    private void update(){
+       horizon+=xDir;
+       vertical+=yDir;
+       if(horizon > 350 || horizon <0){
+           xDir*=-1;
+       }
+       if(vertical > 250 || vertical < 0){
+           yDir*=-1;
+       }
+    }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawRect(50+horizon,50+vertical,50,50);
+        for(Rect rect : rects){
+            rect.draw(g);
+            rect.update();
+        }
     }
 }
