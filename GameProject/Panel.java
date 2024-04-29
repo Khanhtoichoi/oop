@@ -20,7 +20,7 @@ public class Panel extends JPanel {
    private int cnt=0, index=0;
    private final int speed = 15;
    private int action = stand;
-   private int tmp = 0;
+   private int tmp = 1;
     public Panel(){
         create_img();
         setPreferredSize(new Dimension(1280,800));
@@ -33,8 +33,12 @@ public class Panel extends JPanel {
             @Override
             public void keyPressed(KeyEvent e) {
                 int x = e.getKeyCode();
-                if(x == KeyEvent.VK_W) vertical-=10;
+                if(x == KeyEvent.VK_W){
+                    action = up;
+                    vertical-=10;
+                }
                 else if ( x == KeyEvent.VK_A) {
+                    action = left;
                     horizon-=10;
                 }
                 else if (x == KeyEvent.VK_D){
@@ -42,15 +46,27 @@ public class Panel extends JPanel {
                     horizon+=10;
                 }
                 else if (x == KeyEvent.VK_S) {
-                    if(vertical > 800) vertical = 0;
                     vertical += 10;
+                    action = down;
                 }
             }
             @Override
             public void keyReleased(KeyEvent e) {
                 int x = e.getKeyCode();
                 if(x==KeyEvent.VK_D) {
-                    tmp = action-1;
+                    tmp = action;
+                    action = stand;
+                }
+                else if(x == KeyEvent.VK_A){
+                    tmp = action;
+                    action = stand;
+                }
+                else if (x == KeyEvent.VK_S){
+                    tmp = action;
+                    action = stand;
+                }
+                else if(x == KeyEvent.VK_W){
+                    tmp = action;
                     action = stand;
                 }
             }
@@ -95,9 +111,23 @@ public class Panel extends JPanel {
     }
     private void create_img()  {
         pip = new BufferedImage[5][6];
-        for(int j=0; j<2; j++){
+        for(int i=1; i<=4; i++){
+            InputStream x = getClass().getResourceAsStream("Pip/Pip"+(i)+1+".png");
+            try {
+                pip[0][i] = ImageIO.read(x);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } finally {
+                try {
+                    x.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        for(int j=1; j<=4; j++){
         for(int i=0; i<getDir(j); i++){
-            InputStream x = getClass().getResourceAsStream("Pip/Pip"+(i+1)+".png");
+            InputStream x = getClass().getResourceAsStream("Pip/Pip"+j+(i+1)+".png");
             try {
                 pip[j][i] = ImageIO.read(x);
             } catch (IOException e) {
@@ -125,8 +155,8 @@ public class Panel extends JPanel {
         super.paintComponent(g);
         if(action!=0){
             stable_animation();
-            g.drawImage(pip[action][index],horizon,vertical,200,200,null);
+            g.drawImage(pip[action][index],horizon,vertical,150,150,null);
         }
-        else g.drawImage(pip[0][tmp],horizon,vertical,200,200,null);
+        else g.drawImage(pip[0][tmp],horizon,vertical,150,150,null);
     }
 }
