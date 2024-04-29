@@ -151,12 +151,16 @@ public class Panel extends JPanel {
             }
         }
     }
+    public void updates() {
+        stable_animation();
+    }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         if(action!=0){
-            stable_animation();
             g.drawImage(pip[action][index],horizon,vertical,150,150,null);
         }
         else g.drawImage(pip[0][tmp],horizon,vertical,150,150,null);
     }
+
+
 }
