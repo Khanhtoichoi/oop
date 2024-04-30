@@ -14,15 +14,9 @@ import java.util.Objects;
 import static OOP.GameProject.Dir.*;
 
 public class Panel extends JPanel {
-   private int horizon = 50;
-   private int vertical = 50;
-   private BufferedImage[][] pip;
-   private int cnt=0, index=0;
-   private final int speed = 15;
-   private int action = stand;
-   private int tmp = 1;
-    public Panel(){
-        create_img();
+    private GamePlay game;
+    public Panel(GamePlay game){
+        this.game = game;
         setPreferredSize(new Dimension(1280,800));
         addKeyListener(new KeyListener() {
             @Override
@@ -34,40 +28,35 @@ public class Panel extends JPanel {
             public void keyPressed(KeyEvent e) {
                 int x = e.getKeyCode();
                 if(x == KeyEvent.VK_W){
-                    action = up;
-                    vertical-=10;
+                    game.getPlayer().setAction(up);
                 }
                 else if ( x == KeyEvent.VK_A) {
-                    action = left;
-                    horizon-=10;
+                    game.getPlayer().setAction(left);
                 }
                 else if (x == KeyEvent.VK_D){
-                    action = right;
-                    horizon+=10;
+                    game.getPlayer().setAction(right);
                 }
                 else if (x == KeyEvent.VK_S) {
-                    vertical += 10;
-                    action = down;
+                    game.getPlayer().setAction(down);
                 }
             }
             @Override
             public void keyReleased(KeyEvent e) {
                 int x = e.getKeyCode();
                 if(x==KeyEvent.VK_D) {
-                    tmp = action;
-                    action = stand;
+                    game.getPlayer().setAction(stand);
                 }
                 else if(x == KeyEvent.VK_A){
-                    tmp = action;
-                    action = stand;
+                    game.getPlayer().setAction(stand);
+
                 }
                 else if (x == KeyEvent.VK_S){
-                    tmp = action;
-                    action = stand;
+                    game.getPlayer().setAction(stand);
+
                 }
                 else if(x == KeyEvent.VK_W){
-                    tmp = action;
-                    action = stand;
+                    game.getPlayer().setAction(stand);
+
                 }
             }
 
@@ -109,57 +98,10 @@ public class Panel extends JPanel {
            }
        });
     }
-    private void create_img()  {
-        pip = new BufferedImage[5][6];
-        for(int i=1; i<=4; i++){
-            InputStream x = getClass().getResourceAsStream("Pip/Pip"+(i)+1+".png");
-            try {
-                pip[0][i] = ImageIO.read(x);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } finally {
-                try {
-                    x.close();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-        for(int j=1; j<=4; j++){
-        for(int i=0; i<getDir(j); i++){
-            InputStream x = getClass().getResourceAsStream("Pip/Pip"+j+(i+1)+".png");
-            try {
-                pip[j][i] = ImageIO.read(x);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } finally {
-                try {
-                    x.close();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-    }}
-    private void stable_animation(){
-        cnt++;
-        if(cnt >= speed){
-            cnt=0;
-            index++;
-            if(index>=getDir(action)){
-                index=0;
-            }
-        }
-    }
-    public void updates() {
-        stable_animation();
-    }
+
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        if(action!=0){
-            g.drawImage(pip[action][index],horizon,vertical,150,150,null);
-        }
-        else g.drawImage(pip[0][tmp],horizon,vertical,150,150,null);
+        game.render(g);
     }
 
 
