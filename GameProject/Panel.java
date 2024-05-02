@@ -12,12 +12,14 @@ import java.util.List;
 import java.util.Objects;
 
 import static OOP.GameProject.Dir.*;
+import static OOP.GameProject.GamePlay.gameheight;
+import static OOP.GameProject.GamePlay.gamewidth;
 
 public class Panel extends JPanel {
     private GamePlay game;
     public Panel(GamePlay game){
         this.game = game;
-        setPreferredSize(new Dimension(1280,800));
+        setPreferredSize(new Dimension(gamewidth,gameheight));
         addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -97,6 +99,10 @@ public class Panel extends JPanel {
 
            }
        });
+    }
+
+    public GamePlay getGame() {
+        return game;
     }
 
     public void paintComponent(Graphics g){

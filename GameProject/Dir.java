@@ -7,7 +7,7 @@ public class Dir {
     public static int up = 4;
     public static int down = 3;
     public static int getDir(int x){
-        if(x == 0) return 4;
+        if(x == 0) return 3;
         else return 6;
     }
 }
