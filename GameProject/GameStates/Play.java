@@ -19,6 +19,7 @@ public class Play implements State{
         this.game = game;
         player = new Player(170,340);
         map = new StartMap(game);
+
     }
 
     public Player getPlayer() {

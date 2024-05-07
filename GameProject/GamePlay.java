@@ -1,15 +1,18 @@
 package OOP.GameProject;
 
 import OOP.GameProject.GameStates.GameState;
+import OOP.GameProject.GameStates.Loading;
 import OOP.GameProject.GameStates.Menu;
 import OOP.GameProject.GameStates.Play;
 import OOP.GameProject.Map.StartMap;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class GamePlay implements Runnable{
     private Menu menu;
     private Play play;
+    private Loading loading;
     private Panel panel;
     private TrainGUI gui;
     private Thread thread;
@@ -23,9 +26,10 @@ public class GamePlay implements Runnable{
     public final static int gamewidth = tilessize*tileswidth;
     public final static int gameheight = tilessize*tilesheight;
     public GamePlay(){
-        play = new Play(this);
-        menu = new Menu(this);
         panel = new Panel(this);
+        menu = new Menu(this);
+        play = new Play(this);
+        loading = new Loading(this);
         gui = new TrainGUI(panel);
         panel.requestFocusInWindow();
         thread = new Thread(this);
@@ -34,12 +38,14 @@ public class GamePlay implements Runnable{
     public void update(){
         switch (GameState.st){
             case Menu -> menu.update();
+            case Loading -> loading.update();
             case Play -> play.update();
         }
     }
     public void render(Graphics g){
         switch (GameState.st){
             case Menu -> menu.render(g);
+            case Loading -> loading.render(g);
             case Play -> play.render(g);
         }
     }
@@ -75,4 +81,5 @@ public class GamePlay implements Runnable{
             }
         }
     }
+
 }
