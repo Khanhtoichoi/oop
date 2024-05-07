@@ -1,5 +1,7 @@
 package OOP.GameProject;
 
+import OOP.GameProject.GameStates.GameState;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -28,37 +30,16 @@ public class Panel extends JPanel {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                int x = e.getKeyCode();
-                if(x == KeyEvent.VK_W){
-                    game.getPlayer().setAction(up);
-                }
-                else if ( x == KeyEvent.VK_A) {
-                    game.getPlayer().setAction(left);
-                }
-                else if (x == KeyEvent.VK_D){
-                    game.getPlayer().setAction(right);
-                }
-                else if (x == KeyEvent.VK_S) {
-                    game.getPlayer().setAction(down);
+                switch (GameState.st){
+                    case Menu -> game.getMenu().keyPressed(e);
+                    case Play -> game.getPlay().keyPressed(e);
                 }
             }
             @Override
             public void keyReleased(KeyEvent e) {
-                int x = e.getKeyCode();
-                if(x==KeyEvent.VK_D) {
-                    game.getPlayer().setAction(stand);
-                }
-                else if(x == KeyEvent.VK_A){
-                    game.getPlayer().setAction(stand);
-
-                }
-                else if (x == KeyEvent.VK_S){
-                    game.getPlayer().setAction(stand);
-
-                }
-                else if(x == KeyEvent.VK_W){
-                    game.getPlayer().setAction(stand);
-
+                switch (GameState.st){
+                    case Menu -> game.getMenu().keyReleased(e);
+                    case Play -> game.getPlay().keyReleased(e);
                 }
             }
 

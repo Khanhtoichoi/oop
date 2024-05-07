@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import static OOP.GameProject.Dir.*;
+import static OOP.GameProject.GamePlay.*;
 
 public class Player extends Characterr {
     private BufferedImage[][] pip;
@@ -14,7 +15,7 @@ public class Player extends Characterr {
     public static int cnt=0, index=0;
     private final int speed = 10;
     private int action = stand;
-    private int tmp = 1;
+    private int tmp = 3;
     public int getTmp() {
         return tmp;
     }
@@ -48,9 +49,9 @@ public class Player extends Characterr {
     }
     public void render(Graphics g){
         if(action!=0){
-            g.drawImage(pip[action][index],x,y,50,50,null);
+            g.drawImage(pip[action][index],x,y,(int) (35*scale),(int)(35*scale),null);
         }
-        else g.drawImage(pip[0][tmp],x,y,50,50,null);
+        else g.drawImage(pip[0][tmp],x,y,(int) (35*scale),(int)(35*scale),null);
     }
     private void create_img()  {
         pip = new BufferedImage[5][6];
@@ -73,21 +74,31 @@ public class Player extends Characterr {
         }
     }
     private void movement(){
-        if(action == left){
-            tmp = action;
-            x-=2;
+        int xspeed = 0, yspeed = 0;
+        if(action == left) xspeed = -15;
+        else if(action == right) xspeed = 15;
+        else if(action == up) yspeed = -15;
+        else if(action == down) yspeed = 15;
+        if(!CheckCollision.CanMove(x+xspeed,y+yspeed,gamewidth,gameheight)) {
+            action = stand;
         }
-        else if(action == right){
-            tmp = action;
-            x+=2;
-        }
-        else if(action == up){
-            tmp = action;
-            y-=2;
-        }
-        else if(action == down){
-            tmp = action;
-            y+=2;
+        else{
+            if(action == left){
+                tmp = action;
+                x-=2;
+            }
+            else if(action == right){
+                tmp = action;
+                x+=2;
+            }
+            else if(action == up){
+                tmp = action;
+                y-=2;
+            }
+            else if(action == down){
+                tmp = action;
+                y+=2;
+            }
         }
     }
 

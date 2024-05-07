@@ -1,15 +1,18 @@
 package OOP.GameProject;
 
+import OOP.GameProject.GameStates.GameState;
+import OOP.GameProject.GameStates.Menu;
+import OOP.GameProject.GameStates.Play;
 import OOP.GameProject.Map.StartMap;
 
 import java.awt.*;
 
 public class GamePlay implements Runnable{
+    private Menu menu;
+    private Play play;
     private Panel panel;
     private TrainGUI gui;
     private Thread thread;
-    private Player player;
-    private StartMap map;
     private final int FPS = 120;
     private final int UPS = 120;
     public final static int tilesdsize = 32;
@@ -20,8 +23,8 @@ public class GamePlay implements Runnable{
     public final static int gamewidth = tilessize*tileswidth;
     public final static int gameheight = tilessize*tilesheight;
     public GamePlay(){
-        player = new Player(200,200);
-        map = new StartMap(this, player);
+        play = new Play(this);
+        menu = new Menu(this);
         panel = new Panel(this);
         gui = new TrainGUI(panel);
         panel.requestFocusInWindow();
@@ -29,15 +32,26 @@ public class GamePlay implements Runnable{
         thread.start();
     }
     public void update(){
-        player.update();
-        map.update();
+        switch (GameState.st){
+            case Menu -> menu.update();
+            case Play -> play.update();
+        }
     }
     public void render(Graphics g){
-        map.render(g);
-        player.render(g);
+        switch (GameState.st){
+            case Menu -> menu.render(g);
+            case Play -> play.render(g);
+        }
     }
-    public Player getPlayer() {
-        return player;
+    public Play getPlay() {
+        return play;
+    }
+    public Player getPlayer(){
+        return play.getPlayer();
+    }
+
+    public Menu getMenu() {
+        return menu;
     }
 
     @Override
