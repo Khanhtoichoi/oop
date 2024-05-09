@@ -31,7 +31,6 @@ public class StartMap extends Map{
         }
     }
 
-
     public static boolean checkcollision(int x, int y,int gamewidth,int gameheight){
         if(x<0 || x>gamewidth) return false;
         if(y<0 || y>gameheight) return false;
@@ -45,6 +44,8 @@ public class StartMap extends Map{
         if(x>=700 && x<=800 && y<=240 && y>=150) return true;
         if(y>=150 && y<=220 && x>=790 && x<=1200) return true;
         if(y>=140 && y<=300 && x>=1180 && x<=gamewidth) return true;
+        if(x>=450 && x<=490 && y>= 390) return true;
+        if(x>=910 && x<=950 && y>=200) return true;
         return false;
     }
 }

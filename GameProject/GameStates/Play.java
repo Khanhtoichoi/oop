@@ -1,12 +1,14 @@
 package OOP.GameProject.GameStates;
 
 import OOP.GameProject.GamePlay;
+import OOP.GameProject.Load;
 import OOP.GameProject.Map.StartMap;
 import OOP.GameProject.Player;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 
 import static OOP.GameProject.Dir.*;
 import static OOP.GameProject.Dir.down;
@@ -15,11 +17,13 @@ public class Play implements State{
     private Player player;
     private StartMap map;
     private GamePlay game;
+    private BufferedImage img,text;
     public Play(GamePlay game){
         this.game = game;
         player = new Player(170,340);
         map = new StartMap(game);
-
+        img = Load.getImg("GameStates/R.png");
+        text = Load.getImg("GameStates/Text.png");
     }
 
     public Player getPlayer() {
@@ -33,6 +37,8 @@ public class Play implements State{
     public void render(Graphics g){
         map.render(g);
         player.render(g);
+        g.drawImage(img, 0,0,500,137,null);
+        g.drawImage(text,140,20,400,22,null);
     }
 
     @Override
