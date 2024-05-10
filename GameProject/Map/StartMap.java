@@ -2,10 +2,12 @@ package OOP.GameProject.Map;
 
 import OOP.GameProject.GamePlay;
 import OOP.GameProject.Load;
+import OOP.GameProject.Oldman;
 import OOP.GameProject.Player;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.function.ObjLongConsumer;
 
 import static OOP.GameProject.GamePlay.gameheight;
 import static OOP.GameProject.GamePlay.gamewidth;
@@ -14,14 +16,19 @@ public class StartMap extends Map{
     private GamePlay game;
     private BufferedImage img;
     private BufferedImage chest;
+    private Oldman oldman;
     public StartMap(GamePlay game){
         this.game = game;
         img = Load.getImg("Map/Map1.png");
         chest = Load.getImg("Map/chest.png");
+        oldman = new Oldman(0,190);
     }
     public void render(Graphics g){
         g.drawImage(img, 0,0,gamewidth,gameheight,null);
         g.drawImage(chest ,800, 150, 50,50,null);
+        oldman.render(g)
+
+        ;
     }
     public void update(){
         if(game.getPlayer().getX() >= gamewidth-20){

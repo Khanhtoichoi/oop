@@ -4,6 +4,7 @@ import OOP.GameProject.GamePlay;
 import OOP.GameProject.Load;
 import OOP.GameProject.Map.StartMap;
 import OOP.GameProject.Player;
+import OOP.GameProject.TextBox.TutorialTB;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -17,13 +18,13 @@ public class Play implements State{
     private Player player;
     private StartMap map;
     private GamePlay game;
-    private BufferedImage img,text;
+    private BufferedImage img;
+    private TutorialTB tutorialTB;
     public Play(GamePlay game){
         this.game = game;
-        player = new Player(170,340);
+        player = new Player(180,200);
         map = new StartMap(game);
-        img = Load.getImg("GameStates/R.png");
-        text = Load.getImg("GameStates/Text.png");
+        tutorialTB = new TutorialTB();
     }
 
     public Player getPlayer() {
@@ -37,8 +38,9 @@ public class Play implements State{
     public void render(Graphics g){
         map.render(g);
         player.render(g);
-        g.drawImage(img, 0,0,500,137,null);
-        g.drawImage(text,140,20,400,22,null);
+        if(tutorialTB.getIdx()<3){
+            tutorialTB.render(g);
+        }
     }
 
     @Override
@@ -70,6 +72,9 @@ public class Play implements State{
         }
         else if (x == KeyEvent.VK_S) {
             player.setAction(down);
+        }
+        else if(x == KeyEvent.VK_ENTER){
+            tutorialTB.setIdx(tutorialTB.getIdx()+1);
         }
     }
 
