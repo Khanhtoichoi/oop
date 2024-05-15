@@ -1,12 +1,8 @@
 package OOP.GameProject;
 
-import OOP.GameProject.GameStates.GameState;
-import OOP.GameProject.GameStates.Loading;
+import OOP.GameProject.GameStates.*;
 import OOP.GameProject.GameStates.Menu;
-import OOP.GameProject.GameStates.Play;
-import OOP.GameProject.Map.StartMap;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class GamePlay implements Runnable{
@@ -14,23 +10,20 @@ public class GamePlay implements Runnable{
     private Play play;
     private Loading loading;
     private Panel panel;
+    private Lapanel lapanel;
     private TrainGUI gui;
     private Thread thread;
     private final int FPS = 120;
     private final int UPS = 120;
-    public final static int tilesdsize = 32;
-    public final static double scale = 1.5f;
-    public final static int tileswidth = 26;
-    public final static int tilesheight = 14;
-    public final static int tilessize = (int)(tilesdsize*scale);
-    public final static int gamewidth = tilessize*tileswidth;
-    public final static int gameheight = tilessize*tilesheight;
+    public final static int gamewidth = 1248;
+    public final static int gameheight = 672;
     public GamePlay(){
         panel = new Panel(this);
+        lapanel = new Lapanel(this);
         menu = new Menu(this);
         play = new Play(this);
         loading = new Loading(this);
-        gui = new TrainGUI(panel);
+        gui = new TrainGUI(panel,lapanel);
         panel.requestFocusInWindow();
         thread = new Thread(this);
         thread.start();
@@ -40,6 +33,7 @@ public class GamePlay implements Runnable{
             case Menu -> menu.update();
             case Loading -> loading.update();
             case Play -> play.update();
+            case Lapanel -> lapanel.update();
         }
     }
     public void render(Graphics g){
@@ -47,6 +41,7 @@ public class GamePlay implements Runnable{
             case Menu -> menu.render(g);
             case Loading -> loading.render(g);
             case Play -> play.render(g);
+            case Lapanel -> lapanel.render(g);
         }
     }
     public Play getPlay() {
@@ -58,6 +53,10 @@ public class GamePlay implements Runnable{
 
     public Menu getMenu() {
         return menu;
+    }
+
+    public Lapanel getLapanel() {
+        return lapanel;
     }
 
     @Override

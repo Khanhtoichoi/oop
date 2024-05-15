@@ -44,21 +44,6 @@ public class Menu implements State{
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
     public void keyPressed(KeyEvent e) {
         int x = e.getKeyCode();
         if(idx!=1){

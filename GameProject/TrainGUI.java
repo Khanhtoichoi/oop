@@ -1,9 +1,6 @@
 package OOP.GameProject;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 
@@ -11,11 +8,14 @@ import static OOP.GameProject.Dir.stand;
 
 public class TrainGUI {
     private JFrame frame;
-    public TrainGUI(Panel panel) {
+    private JButton button;
+    public TrainGUI(Panel panel, Lapanel lapanel) {
         frame = new JFrame();
+        frame.setTitle("Pip Adventure");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
         frame.setResizable(false);
+        frame.repaint();
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -32,4 +32,7 @@ public class TrainGUI {
         });
     }
 
+    public JFrame getFrame() {
+        return frame;
+    }
 }

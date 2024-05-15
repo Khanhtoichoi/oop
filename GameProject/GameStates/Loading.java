@@ -28,7 +28,10 @@ public class Loading {
 
     public void update() {
         animation();
-        if(count == 5) GameState.st = GameState.Play;
+        if(count == 5){
+            GameState.st = GameState.Play;
+            count = 0;
+        }
     }
     public void animation(){
         cnt++;

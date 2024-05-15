@@ -49,9 +49,9 @@ public class Player extends Characterr {
     }
     public void render(Graphics g){
         if(action!=0){
-            g.drawImage(pip[action][index],x,y,(int) (35*scale),(int)(35*scale),null);
+            g.drawImage(pip[action][index],x,y,(int) (35*1.5),(int)(35*1.5),null);
         }
-        else g.drawImage(pip[0][tmp],x,y,(int) (35*scale),(int)(35*scale),null);
+        else g.drawImage(pip[0][tmp],x,y,(int) (35*1.5),(int)(35*1.5),null);
     }
     private void create_img()  {
         pip = new BufferedImage[5][6];
