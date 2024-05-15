@@ -1,6 +1,6 @@
 package OOP.GameProject.Map;
 
 public enum MapManager {
-    StartMap, FireMap;
-    public static MapManager map = StartMap;
+    StartMap, FireMap, ClassMap;
+    public static MapManager map = ClassMap;
 }

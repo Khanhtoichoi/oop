@@ -10,6 +10,7 @@ public class GamePlay implements Runnable{
     private Play play;
     private Loading loading;
     private Panel panel;
+    private Firepanel firepanel;
     private Lapanel lapanel;
     private TrainGUI gui;
     private Thread thread;
@@ -22,6 +23,7 @@ public class GamePlay implements Runnable{
         lapanel = new Lapanel(this);
         menu = new Menu(this);
         play = new Play(this);
+        firepanel = new Firepanel(this);
         loading = new Loading(this);
         gui = new TrainGUI(panel,lapanel);
         panel.requestFocusInWindow();
@@ -34,6 +36,7 @@ public class GamePlay implements Runnable{
             case Loading -> loading.update();
             case Play -> play.update();
             case Lapanel -> lapanel.update();
+            case Firepanel -> firepanel.update();
         }
     }
     public void render(Graphics g){
@@ -42,6 +45,7 @@ public class GamePlay implements Runnable{
             case Loading -> loading.render(g);
             case Play -> play.render(g);
             case Lapanel -> lapanel.render(g);
+            case Firepanel -> firepanel.render(g);
         }
     }
     public Play getPlay() {
@@ -57,6 +61,10 @@ public class GamePlay implements Runnable{
 
     public Lapanel getLapanel() {
         return lapanel;
+    }
+
+    public Firepanel getFirepanel() {
+        return firepanel;
     }
 
     @Override

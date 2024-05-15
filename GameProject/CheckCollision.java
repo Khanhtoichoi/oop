@@ -1,5 +1,6 @@
 package OOP.GameProject;
 
+import OOP.GameProject.Map.ClassMap;
 import OOP.GameProject.Map.FireMap;
 import OOP.GameProject.Map.MapManager;
 import OOP.GameProject.Map.StartMap;
@@ -15,6 +16,9 @@ public class CheckCollision {
             }
             case FireMap -> {
                 return FireMap.checkcollision(x,y,width,height);
+            }
+            case ClassMap -> {
+                return ClassMap.checkcollision(x,y,width,height);
             }
         }
         return false;

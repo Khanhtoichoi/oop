@@ -2,6 +2,7 @@ package OOP.GameProject.GameStates;
 
 import OOP.GameProject.GamePlay;
 import OOP.GameProject.Load;
+import OOP.GameProject.Map.ClassMap;
 import OOP.GameProject.Map.FireMap;
 import OOP.GameProject.Map.MapManager;
 import OOP.GameProject.Map.StartMap;
@@ -24,6 +25,7 @@ public class Play implements State{
     private Player player;
     private StartMap startMap;
     private FireMap fireMap;
+    private ClassMap classMap;
     private GamePlay game;
     private BufferedImage img;
     private TutorialTB tutorialTB;
@@ -33,6 +35,7 @@ public class Play implements State{
         player = new Player(180,200);
         startMap = new StartMap(game);
         fireMap = new FireMap(game);
+        classMap = new ClassMap(game);
         tutorialTB = new TutorialTB();
     }
 
@@ -45,12 +48,14 @@ public class Play implements State{
         switch (MapManager.map){
             case FireMap -> fireMap.update();
             case StartMap -> startMap.update();
+            case ClassMap -> classMap.update();
         }
     }
     public void render(Graphics g){
         switch (MapManager.map){
             case StartMap -> startMap.render(g);
             case FireMap -> fireMap.render(g);
+            case ClassMap -> classMap.render(g);
         }
         player.render(g);
         if(tutorialTB.getIdx()<5){
@@ -75,25 +80,31 @@ public class Play implements State{
         else if(x == KeyEvent.VK_ENTER){
             tutorialTB.update();
         }
-        switch (MapManager.map){
+        if(x== KeyEvent.VK_ENTER){
+        switch (MapManager.map) {
             case StartMap -> {
-                if(x == KeyEvent.VK_ENTER && player.getY()>=190 && player.getY()<=220 && player.getX()<=60){
+                if (player.getY() >= 190 && player.getY() <= 220 && player.getX() <= 60) {
                     startMap.getOldman().setOmcheck(true);
                     startMap.getOmtb().update();
                 }
-                if(x == KeyEvent.VK_ENTER && player.getY()>=150 && player.getY()<=180 && player.getX()>=780 && player.getX()<=810){
+                if (player.getY() >= 150 && player.getY() <= 180 && player.getX() >= 780 && player.getX() <= 810) {
                     startMap.getChestTextbox().setCheck(true);
                     startMap.getChestTextbox().update();
                 }
+                if (player.getX() >= 450 && player.getX() <= 490 && player.getY() >= 600 && player.getY() <= 650 && game.getFirepanel().isCheck()) {
+                    startMap.getClassTB().update();
+                }
             }
             case FireMap -> {
-                if (x == KeyEvent.VK_ENTER && player.getX()<=230 && game.getLapanel().isCheck() ){
+                if (player.getX() <= 230 && game.getLapanel().isCheck()) {
                     fireMap.getFireTB().update();
                 }
-                if(x == KeyEvent.VK_ENTER && player.getX() >= 1030 && player.getX() <=1070 && player.getY()>=130 && player.getY()<=170){
-                    
+                if (player.getX() >= 1000 && player.getX() <= 1050 && player.getY() >= 80 && player.getY() <= 130) {
+                    fireMap.getDevilTB().setCheck(true);
+                    fireMap.getDevilTB().update();
                 }
             }
+        }
         }
     }
 

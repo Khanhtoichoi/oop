@@ -1,9 +1,11 @@
 package OOP.GameProject.Map;
 
 import OOP.GameProject.Devil;
+import OOP.GameProject.Firepanel;
 import OOP.GameProject.GamePlay;
 import OOP.GameProject.GameStates.GameState;
 import OOP.GameProject.Load;
+import OOP.GameProject.TextBox.DevilTB;
 import OOP.GameProject.TextBox.FireTB;
 
 import java.awt.*;
@@ -15,19 +17,24 @@ import static OOP.GameProject.GamePlay.gamewidth;
 public class FireMap extends Map{
     private Devil devil;
     private static FireTB fireTB;
+    private DevilTB devilTB;
     public FireMap(GamePlay game){
         this.game = game;
         img = Load.getImg("Map/Map.jpg");
         fireTB = new FireTB();
         devil = new Devil(1030,150);
+        devilTB = new DevilTB();
     }
     @Override
     public void render(Graphics g) {
         g.drawImage(img,0,0,gamewidth,gameheight,null);
-        if(MapManager.map == MapManager.FireMap && fireTB.getIdx()>=0 && fireTB.getIdx()<1){
+        if(fireTB.getIdx()>=0 && fireTB.getIdx()<1){
             fireTB.render(g);
         }
         devil.render(g);
+        if(devilTB.isCheck() && devilTB.getIdx()<3){
+            devilTB.render(g);
+        }
     }
 
     @Override
@@ -36,6 +43,21 @@ public class FireMap extends Map{
             MapManager.map = MapManager.StartMap;
             game.getPlayer().setX(1200);
             game.getPlayer().setY(200);
+        }
+        if(devilTB.getIdx()>=1 && !game.getFirepanel().isCheck()) {
+            GameState.st = GameState.Firepanel;
+            devilTB.setIdx(-1);
+            devilTB.setCheck(false);
+        }
+        if (game.getFirepanel().isCheck()){
+            if (devilTB.getIdx() == -1){
+                devilTB.setIdx(1);
+                devilTB.setCheck(true);
+            }
+            if (devilTB.getIdx()>=3){
+                devilTB.setIdx(0);
+                devilTB.setCheck(false);
+            }
         }
     }
     public static boolean checkcollision(int x, int y,int width,int height){
@@ -53,5 +75,9 @@ public class FireMap extends Map{
 
     public FireTB getFireTB() {
         return fireTB;
+    }
+
+    public DevilTB getDevilTB() {
+        return devilTB;
     }
 }

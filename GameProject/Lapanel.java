@@ -14,10 +14,10 @@ import static OOP.GameProject.GamePlay.gamewidth;
 
 public class Lapanel extends Textbox {
     private GamePlay game;
-    private int pos = 1;
-    private BufferedImage bg, matrix,avatar, text[];
-    private BufferedImage[][] ans;
-    private int[] idxx;
+    protected int pos = 1;
+    protected BufferedImage bg, matrix,avatar, text[];
+    protected BufferedImage[][] ans;
+    protected int[] idxx;
     private int rand = 0;
     public Lapanel(GamePlay game){
         this.game = game;

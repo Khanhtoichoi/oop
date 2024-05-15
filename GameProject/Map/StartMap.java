@@ -6,6 +6,7 @@ import OOP.GameProject.Load;
 import OOP.GameProject.Oldman;
 import OOP.GameProject.Player;
 import OOP.GameProject.TextBox.ChestTextbox;
+import OOP.GameProject.TextBox.ClassTB;
 import OOP.GameProject.TextBox.OldmanTB;
 
 import java.awt.*;
@@ -20,6 +21,7 @@ public class StartMap extends Map{
     private Oldman oldman;
     private OldmanTB omtb;
     private ChestTextbox chestTextbox;
+    private ClassTB classTB;
     public StartMap(GamePlay game){
         this.game = game;
         img = Load.getImg("Map/Map1.png");
@@ -27,13 +29,22 @@ public class StartMap extends Map{
         chestTextbox = new ChestTextbox();
         oldman = new Oldman(0,190);
         omtb = new OldmanTB();
+        classTB = new ClassTB();
     }
-    public void render(Graphics g){
-        g.drawImage(img, 0,0,gamewidth,gameheight,null);
-        g.drawImage(chest ,800, 150, 50,50,null);
+    public void render(Graphics g) {
+        g.drawImage(img, 0, 0, gamewidth, gameheight, null);
+        g.drawImage(chest, 800, 150, 50, 50, null);
         oldman.render(g);
-        if(oldman.isOmcheck() && omtb.getIdx()<2) omtb.render(g);
-        if(chestTextbox.isCheck() && chestTextbox.getIdx()<1) chestTextbox.render(g);
+        if (oldman.isOmcheck() && omtb.getIdx() < 2) omtb.render(g);
+        if (chestTextbox.isCheck() && chestTextbox.getIdx() < 1) chestTextbox.render(g);
+        if (classTB.getIdx() >= 0 && classTB.getIdx() < 1) {
+            classTB.render(g);
+        }
+        else if(classTB.getIdx()>=1){
+            MapManager.map = MapManager.ClassMap;
+            game.getPlayer().setX(600);
+            game.getPlayer().setY(300);
+        }
     }
     public void update(){
         if(game.getPlayer().getX() >= gamewidth-20){
@@ -60,6 +71,7 @@ public class StartMap extends Map{
             chestTextbox.setCheck(false);
             chestTextbox.setIdx(-1);
         }
+
     }
 
     public static boolean checkcollision(int x, int y,int gamewidth,int gameheight){
@@ -90,6 +102,9 @@ public class StartMap extends Map{
 
     public ChestTextbox getChestTextbox() {
         return chestTextbox;
+    }
+    public ClassTB getClassTB() {
+        return classTB;
     }
 }
 
