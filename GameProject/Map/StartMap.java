@@ -44,6 +44,7 @@ public class StartMap extends Map{
             MapManager.map = MapManager.ClassMap;
             game.getPlayer().setX(600);
             game.getPlayer().setY(300);
+            classTB.setIdx(-1);
         }
     }
     public void update(){

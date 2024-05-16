@@ -12,6 +12,7 @@ public class GamePlay implements Runnable{
     private Panel panel;
     private Firepanel firepanel;
     private Lapanel lapanel;
+    private ClassPanel classPanel;
     private TrainGUI gui;
     private Thread thread;
     private final int FPS = 120;
@@ -24,6 +25,7 @@ public class GamePlay implements Runnable{
         menu = new Menu(this);
         play = new Play(this);
         firepanel = new Firepanel(this);
+        classPanel = new ClassPanel(this);
         loading = new Loading(this);
         gui = new TrainGUI(panel,lapanel);
         panel.requestFocusInWindow();
@@ -37,6 +39,7 @@ public class GamePlay implements Runnable{
             case Play -> play.update();
             case Lapanel -> lapanel.update();
             case Firepanel -> firepanel.update();
+            case Classpanel -> classPanel.update();
         }
     }
     public void render(Graphics g){
@@ -46,6 +49,7 @@ public class GamePlay implements Runnable{
             case Play -> play.render(g);
             case Lapanel -> lapanel.render(g);
             case Firepanel -> firepanel.render(g);
+            case Classpanel -> classPanel.render(g);
         }
     }
     public Play getPlay() {
@@ -65,6 +69,10 @@ public class GamePlay implements Runnable{
 
     public Firepanel getFirepanel() {
         return firepanel;
+    }
+
+    public ClassPanel getClassPanel() {
+        return classPanel;
     }
 
     @Override

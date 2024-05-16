@@ -104,6 +104,12 @@ public class Play implements State{
                     fireMap.getDevilTB().update();
                 }
             }
+            case ClassMap -> {
+                if(player.getX()>=580 && player.getX()<=630){
+                    classMap.getProfTB().setCheck(true);
+                    classMap.getProfTB().update();
+                }
+            }
         }
         }
     }

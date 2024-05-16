@@ -9,16 +9,17 @@ import java.awt.image.BufferedImage;
 import static OOP.GameProject.GamePlay.gameheight;
 import static OOP.GameProject.GamePlay.gamewidth;
 
-public class Firepanel extends Lapanel{
-    private BufferedImage integral;
-    public Firepanel(GamePlay game) {
+public class ClassPanel extends Lapanel{
+    private BufferedImage Physics;
+    private BufferedImage exercise;
+    public ClassPanel(GamePlay game) {
         super(game);
-        avatar = Load.getImg("TextBox/Devil.jpg");
-        text[0] = Load.getImg("TextBox/FireText.png");
-        integral = Load.getImg("GameStates/Integral.png");
+        avatar = Load.getImg("TextBox/Prof.jpg");
+        text[0] = Load.getImg("TextBox/ClassText.png");
+        exercise = Load.getImg("TextBox/Exercise.png");
         for(int i=0; i<4; i++){
             for (int j=0; j<2; j++){
-                ans[i][j] = Load.getImg("GameStates/Fans" + (i) + (j) + ".png");
+                ans[i][j] = Load.getImg("GameStates/Cans" + (i) + (j) + ".png");
             }
         }
     }
@@ -29,9 +30,9 @@ public class Firepanel extends Lapanel{
         g.drawImage(img, 330,80,600,164,null);
         g.drawImage(avatar,340,90,145,145,null);
         g.drawImage(text[idx],500,100,400,19,null);
-        g.drawImage(integral,250,350,500,58,null);
+        g.drawImage(exercise,250,320,500,77,null);
         for(int i=0; i<4; i++){
-            g.drawImage(ans[i][idxx[i]],850,290+i*40,80,22,null);
+            g.drawImage(ans[i][idxx[i]],850,290+i*40,102,22,null);
         }
     }
 
@@ -46,11 +47,11 @@ public class Firepanel extends Lapanel{
                 idx = 0;
                 pos = 1;
             }
-            else if(pos == 4){
+            else if(pos == 3){
                 idx = 1;
                 check = true;
             }
-            else if(pos !=4) idx=2;
+            else if(pos !=3) idx=2;
         }
     }
 }

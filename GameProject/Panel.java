@@ -27,6 +27,7 @@ public class Panel extends JPanel {
                     case Play -> game.getPlay().keyPressed(e);
                     case Lapanel -> game.getLapanel().keyPressed(e);
                     case Firepanel -> game.getFirepanel().keyPressed(e);
+                    case Classpanel -> game.getClassPanel().keyPressed(e);
                 }
             }
             @Override
