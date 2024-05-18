@@ -50,7 +50,10 @@ public class Firepanel extends Lapanel{
                 idx = 1;
                 check = true;
             }
-            else if(pos !=4) idx=2;
+            else if(pos !=4) {
+                idx = 2;
+                game.getPlayer().HPupdate();
+            }
         }
     }
 }

@@ -36,7 +36,7 @@ public class StartMap extends Map{
         g.drawImage(chest, 800, 150, 50, 50, null);
         oldman.render(g);
         if (oldman.isOmcheck() && omtb.getIdx() < 2) omtb.render(g);
-        if (chestTextbox.isCheck() && chestTextbox.getIdx() < 1) chestTextbox.render(g);
+        if (chestTextbox.isCheck() && chestTextbox.getIdx() < 2) chestTextbox.render(g);
         if (classTB.getIdx() >= 0 && classTB.getIdx() < 1) {
             classTB.render(g);
         }
@@ -68,9 +68,18 @@ public class StartMap extends Map{
                 oldman.setOmcheck(false);
             }
         }
-        if(chestTextbox.getIdx()>=1){
-            chestTextbox.setCheck(false);
-            chestTextbox.setIdx(-1);
+        if(game.getFirepanel().isCheck() && game.getLapanel().isCheck() && game.getClassPanel().isCheck()){
+            if(chestTextbox.getIdx()>1 && !game.getChestPanel().isCheck()){
+                GameState.st = GameState.Chestpanel;
+                chestTextbox.setIdx(-1);
+                chestTextbox.setCheck(false);
+            }
+        }
+        else {
+            if(chestTextbox.getIdx()>=1){
+                chestTextbox.setCheck(false);
+                chestTextbox.setIdx(-1);
+            }
         }
 
     }

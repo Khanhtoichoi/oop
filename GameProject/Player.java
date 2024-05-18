@@ -10,6 +10,7 @@ import static OOP.GameProject.Dir.*;
 import static OOP.GameProject.GamePlay.*;
 
 public class Player extends Characterr {
+    private int HP = 3;
     private BufferedImage[][] pip;
     private BufferedImage[][] pipstand;
     public static int cnt=0, index=0;
@@ -47,6 +48,14 @@ public class Player extends Characterr {
         movement();
         stable_animation();
     }
+
+    public int getHP() {
+        return HP;
+    }
+    public void HPupdate(){
+        HP--;
+    }
+
     public void render(Graphics g){
         if(action!=0){
             g.drawImage(pip[action][index],x,y,(int) (35*1.5),(int)(35*1.5),null);

@@ -1,6 +1,7 @@
 package OOP.GameProject.GameStates;
 
 import OOP.GameProject.GamePlay;
+import OOP.GameProject.Lapanel;
 import OOP.GameProject.Load;
 import OOP.GameProject.Map.ClassMap;
 import OOP.GameProject.Map.FireMap;
@@ -27,9 +28,10 @@ public class Play implements State{
     private FireMap fireMap;
     private ClassMap classMap;
     private GamePlay game;
-    private BufferedImage img;
+    private BufferedImage win, lose,scho;
     private TutorialTB tutorialTB;
     private Textbox textbox;
+    private int idx = 0;
     public Play(GamePlay game){
         this.game = game;
         player = new Player(180,200);
@@ -37,6 +39,9 @@ public class Play implements State{
         fireMap = new FireMap(game);
         classMap = new ClassMap(game);
         tutorialTB = new TutorialTB();
+        win = Load.getImg("GameStates/Win.png");
+        scho = Load.getImg("GameStates/Scho.png");
+        lose = Load.getImg("GameStates/Lose.png");
     }
 
     public Player getPlayer() {
@@ -60,6 +65,17 @@ public class Play implements State{
         player.render(g);
         if(tutorialTB.getIdx()<5){
             tutorialTB.render(g);
+        }
+        if(game.getChestPanel().isCheck()){
+            GameState.st = GameState.Icepanel;
+            g.drawImage(win,300,170,null);
+            g.drawImage(scho,300,350,null);
+            if(idx>=1) System.exit(0);
+        }
+        else if(game.getChestPanel().isCheckfalse() || player.getHP()==0){
+            GameState.st = GameState.Icepanel;
+            g.drawImage(lose,250,170,null);
+            if(idx>=1) System.exit(0);
         }
     }
     @Override
@@ -87,14 +103,27 @@ public class Play implements State{
                     startMap.getOldman().setOmcheck(true);
                     startMap.getOmtb().update();
                 }
-                if (player.getY() >= 150 && player.getY() <= 180 && player.getX() >= 780 && player.getX() <= 810) {
+                if (player.getY() >= 150 && player.getY() <= 180 && player.getX() >= 780 && player.getX() <= 830) {
                     startMap.getChestTextbox().setCheck(true);
-                    startMap.getChestTextbox().update();
+                    if(game.getFirepanel().isCheck() && game.getLapanel().isCheck() && game.getClassPanel().isCheck()){
+                        if(startMap.getChestTextbox().getIdx()>=1){
+                            startMap.getChestTextbox().update();
+                        }
+                        else startMap.getChestTextbox().setIdx(1);
+                    }
+                    else startMap.getChestTextbox().update();
                 }
                 if (player.getX() >= 450 && player.getX() <= 490 && player.getY() >= 600 && player.getY() <= 650 && game.getFirepanel().isCheck()) {
                     startMap.getClassTB().update();
                 }
+                if(game.getChestPanel().isCheck()) {
+                    idx++;
+                }
+                else if(game.getChestPanel().isCheckfalse() || player.getHP()==0) {
+                    idx++;
+                }
             }
+
             case FireMap -> {
                 if (player.getX() <= 230 && game.getLapanel().isCheck()) {
                     fireMap.getFireTB().update();

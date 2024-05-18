@@ -13,7 +13,7 @@ import static OOP.GameProject.GamePlay.gameheight;
 import static OOP.GameProject.GamePlay.gamewidth;
 
 public class Lapanel extends Textbox {
-    private GamePlay game;
+    protected GamePlay game;
     protected int pos = 1;
     protected BufferedImage bg, matrix,avatar, text[];
     protected BufferedImage[][] ans;
@@ -63,7 +63,10 @@ public class Lapanel extends Textbox {
                  idx = 1;
                  check = true;
             }
-             else if(pos !=1) idx=2;
+             else if(pos !=1) {
+                 idx = 2;
+                 game.getPlayer().HPupdate();
+            }
         }
     }
 

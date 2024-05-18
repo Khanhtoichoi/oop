@@ -13,6 +13,7 @@ public class GamePlay implements Runnable{
     private Firepanel firepanel;
     private Lapanel lapanel;
     private ClassPanel classPanel;
+    private ChestPanel chestPanel;
     private TrainGUI gui;
     private Thread thread;
     private final int FPS = 120;
@@ -26,6 +27,7 @@ public class GamePlay implements Runnable{
         play = new Play(this);
         firepanel = new Firepanel(this);
         classPanel = new ClassPanel(this);
+        chestPanel = new ChestPanel(this);
         loading = new Loading(this);
         gui = new TrainGUI(panel,lapanel);
         panel.requestFocusInWindow();
@@ -40,6 +42,7 @@ public class GamePlay implements Runnable{
             case Lapanel -> lapanel.update();
             case Firepanel -> firepanel.update();
             case Classpanel -> classPanel.update();
+            case Chestpanel -> chestPanel.update();
         }
     }
     public void render(Graphics g){
@@ -50,6 +53,8 @@ public class GamePlay implements Runnable{
             case Lapanel -> lapanel.render(g);
             case Firepanel -> firepanel.render(g);
             case Classpanel -> classPanel.render(g);
+            case Chestpanel -> chestPanel.render(g);
+            case Icepanel -> play.render(g);
         }
     }
     public Play getPlay() {
@@ -73,6 +78,10 @@ public class GamePlay implements Runnable{
 
     public ClassPanel getClassPanel() {
         return classPanel;
+    }
+
+    public ChestPanel getChestPanel() {
+        return chestPanel;
     }
 
     @Override
