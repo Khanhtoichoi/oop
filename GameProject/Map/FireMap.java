@@ -70,6 +70,9 @@ public class FireMap extends Map{
             if(y>=150 && y<=250 && x>=100 && x<=200) return false;
             if(x<=200 && y>=240 && y<=300) return false;
         }
+        if(y>=380 && y<=450 && x>=800 && x<=850) return true;
+        if(y>=120 && y<=450 && x>=950 && x<=1080) return false;
+        if(y>=150 && y<=450 && x>=800 && x<=950) return false;
         return true;
     }
 
