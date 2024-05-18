@@ -47,10 +47,10 @@ public class Menu implements State{
     public void keyPressed(KeyEvent e) {
         int x = e.getKeyCode();
         if(idx!=1){
-            if( x == KeyEvent.VK_DOWN) idx++;
+            if( x == KeyEvent.VK_S) idx++;
         }
         if(idx!=0){
-            if( x== KeyEvent.VK_UP) idx--;
+            if( x== KeyEvent.VK_W) idx--;
         }
         if(x == KeyEvent.VK_ENTER){
             if(idx == 0) GameState.st = GameState.Loading;
